@@ -8,7 +8,7 @@ class DiffieHellmanKeyExchange
     @generator ** secret_key % @prime_modulus
   end
 
-  def decrypt_common_secret(message, secret)
-    message ** secret % @prime_modulus
+  def decrypt_common_secret(message, secret_key)
+    message ** secret_key % @prime_modulus
   end
 end
