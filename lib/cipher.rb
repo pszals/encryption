@@ -52,6 +52,17 @@ class Cipher
     encrypted_line
   end
 
+  def resetting_encrypt(line, rotation)
+    encrypted_line = ""
+    rotate = rotation
+    line.split(//).each_with_index do |char, index|
+      rotate = rotation if index % rotation == 0
+      encrypted_line << encrypt_char(char, rotate)
+      rotate += 1
+    end
+    encrypted_line
+  end
+
   def indexes_to_characters
     map = {}
     letters = ("A".."z").to_a
