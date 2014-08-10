@@ -56,8 +56,12 @@ describe Cipher do
       encryptor.multiplicative_decrypt("2468", 1).should == "1234"
     end
 
-    it "resets rotational amount" do
+    it "encrypts by resetting rotational amount" do
       encryptor.resetting_encrypt("111111", 3).should == "456456"
+    end
+
+    it "decrypts by resetting rotational amount" do
+      encryptor.resetting_decrypt("456456", 3).should == "111111"
     end
   end
 end
