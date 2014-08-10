@@ -6,11 +6,50 @@ class Cipher
 
   def encrypt_char(char, amount_to_rotate)
     return " " unless index = characters_to_indexes[char]
-
     rotational_magnitude = index + amount_to_rotate
     new_character_index = rotational_magnitude % indexes_to_characters.length
 
     indexes_to_characters[new_character_index]
+  end
+  
+  def decrypt_char(char, amount_to_rotate)
+    return " " unless index = characters_to_indexes[char]
+    rotational_magnitude = index - amount_to_rotate
+    new_character_index = rotational_magnitude % indexes_to_characters.length
+
+    indexes_to_characters[new_character_index]
+  end
+
+  def encrypt_line(line, amount_to_rotate)
+    encrypted_line = ""
+    line.each_char {|char| encrypted_line << encrypt_char(char, amount_to_rotate)}
+    encrypted_line
+  end
+
+  def decrypt_line(line, amount_to_rotate)
+    encrypted_line = ""
+    line.each_char {|char| encrypted_line << decrypt_char(char, amount_to_rotate)}
+    encrypted_line
+  end
+
+  def multiplicative_encrypt(line, rotation)
+    encrypted_line = ""
+    rotate = rotation
+    line.split(//).each do |char| 
+      encrypted_line << encrypt_char(char, rotate)
+      rotate += rotation
+    end
+    encrypted_line
+  end
+
+  def multiplicative_decrypt(line, rotation)
+    encrypted_line = ""
+    rotate = rotation
+    line.split(//).each do |char| 
+      encrypted_line << decrypt_char(char, rotate)
+      rotate += rotation
+    end
+    encrypted_line
   end
 
   def indexes_to_characters
