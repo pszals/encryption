@@ -7,8 +7,12 @@ describe FileEncryptor do
 
     file_encryptor.encrypt_line(test_file)
 
-    encrypted_file = File.open("encrypted_test_file.txt")
+    path_to_encrypted_files = File.expand_path(".") + "/encrypted_files"
+    encrypted_file = File.open("#{path_to_encrypted_files}/encrypted_test_file.txt")
     encrypted_file.gets.should == 0
+
+    File.delete("test_file.txt")
+    File.delete("#{path_to_encrypted_files}/encrypted_test_file.txt")
   end
 
   it "outputs a new text file with 'encrypted' prefixed to the file name" do
