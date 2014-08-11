@@ -36,11 +36,6 @@ describe Encryptor do
       encryptor.multiplicative_encrypt("1234", 1).should == "2468"
     end
 
-    it "decrypts a number of characters by a given amount, then decrements rotational and continues to decrypt" do
-      encryptor.multiplicative_decrypt("2468", 1).should == "1234"
-    end
-
-
     it "encrypts by resetting rotational amount" do
       encryptor.resetting_encrypt("111111", 3).should == "456456"
     end

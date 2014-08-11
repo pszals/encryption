@@ -14,18 +14,4 @@ describe Cipher do
       map["A"].should == 0
     end
   end
-
-  describe "decryption" do
-    it "decrypts a character" do
-      encryptor.decrypt_char("b", 1).should == "a"
-    end
-
-    it "decrypts a whole string" do
-      encryptor.decrypt_line("bcd", 1).should == "abc"
-    end
-  end
-
-  it "decrypts by resetting rotational amount" do
-    encryptor.resetting_decrypt("456456", 3).should == "111111"
-  end
 end
