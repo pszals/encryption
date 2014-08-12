@@ -3,10 +3,6 @@ require "encryptor"
 describe Encryptor do
   let(:encryptor) { described_class.new }
 
-  it "is a cipher" do
-    encryptor.is_a?(Cipher).should be_true
-  end
-
   describe "additive encryption" do
     it "rotates a letter by a given amouunt" do
       encryptor.encrypt_char("a", 1).should == "b"
