@@ -1,16 +1,22 @@
-class FileEncryptor
+require './lib/encryptor'
 
+class FileEncryptor
   def encrypt_line(file)
+    encryptor = Encryptor.new
     path_to_encrypted_files = File.expand_path(".") + "/encrypted_files"
-    file_to_encrypt = File.open("#{path_to_encrypted_files}"+"/encrypted_#{file.to_path}", "w+")
-    output(file)
+    path = "#{file.to_path}"
+    words = ""
+    IO.foreach(path) do |line|
+      words += encryptor.resetting_encrypt(line, 3)
+      # words += encryptor.multiplicative_encrypt(line, 1)
+    end
+    words
   end
 
   def output(file, text=nil)
     path_to_encrypted_files = File.expand_path(".") + "/encrypted_files"
-    file = File.new("#{path_to_encrypted_files}"+"/encrypted_#{file.to_path}", "w+")
+    file_path = "#{path_to_encrypted_files}"+"/encrypted_#{file.to_path}"
 
-    file.write(text)
-    file
+    File.write(file_path, text)
   end
 end
